@@ -1,0 +1,19 @@
+<!-- Navigation Bar -->
+<nav class="bg-gray-800 p-4 flex items-center justify-between fixed top-0 w-full z-10">
+  <a routerLink="" class="text-white font-medium">NostRdd</a>
+  <div class="flex items-center">
+    <a routerLink="home" class="mr-4 text-white hover:text-gray-400">Home</a>
+    <a routerLink="create-topic" class="mr-4 text-white hover:text-gray-400">Create Topic</a>
+    <a routerLink="profile" class="text-white hover:text-gray-400">Profile</a>
+  </div>
+</nav>
+
+<!-- Post List and Footer Wrapper -->
+<div class="container mx-auto flex-1 mt-14 overflow-y-scroll" style="height: calc(100vh - 56px); overflow-x: hidden;">
+  <router-outlet></router-outlet>
+  <!-- Footer -->
+  <footer class="bg-gray-800 p-4 text-center text-white sticky top-[100vh]">
+    &copy; {{currentYear}} Nostrdd
+  </footer>
+</div>
+

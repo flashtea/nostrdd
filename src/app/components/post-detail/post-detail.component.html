@@ -1,0 +1,17 @@
+<div class="container mx-auto px-8 pt-4">
+    <h1 class="text-2xl font-bold mb-4">{{ post.title }}</h1>
+    <p class="text-gray-600 mb-2">{{ post.subforum }}</p>
+    <p class="text-gray-700 mb-4">{{ post.body }}</p>
+    <div class="flex justify-between mb-4">
+      <p class="text-gray-600">{{ post.votes }} votes</p>
+      <a routerLink="/" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-400">Back</a>
+    </div>
+    <h2 class="text-lg font-bold mb-2">Comments</h2>
+    <div class="mb-4" *ngFor="let comment of comments">
+      <div class="bg-white p-4 shadow-md rounded-lg">
+        <p class="text-gray-600 mb-2">{{ comment.author }}</p>
+        <p class="text-gray-700 mb-4">{{ comment.body }}</p>
+      </div>
+    </div>
+  </div>
+  

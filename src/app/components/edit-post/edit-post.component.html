@@ -1,0 +1,33 @@
+<div class="container mx-auto  px-8">
+    <h1 class="text-2xl font-bold mb-4">Edit Post</h1>
+    
+    <form>
+      <div class="mb-4">
+        <label class="block text-gray-700 font-medium mb-2" for="title">
+          Title
+        </label>
+        <input 
+          class="w-full border border-gray-400 p-2 rounded-lg" 
+          type="text" 
+          id="title" 
+          name="title" 
+          [(ngModel)]="post.title" 
+        >
+      </div>
+  
+      <div class="mb-4">
+        <label class="block text-gray-700 font-medium mb-2" for="body">
+          Body
+        </label>
+        <textarea 
+          class="w-full border border-gray-400 p-2 rounded-lg" 
+          id="body" 
+          name="body" 
+          [(ngModel)]="post.body" 
+        ></textarea>
+      </div>
+  
+      <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-400">Save Changes</button>
+    </form>
+  </div>
+  
