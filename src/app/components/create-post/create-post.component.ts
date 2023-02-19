@@ -26,6 +26,6 @@ export class CreatePostComponent {
   }
 
   onSubmit() {
-    this.nostrService.createMessage(this.topicId, this.newPost.title, this.newPost.message)
+    this.nostrService.createPost(this.topicId, this.newPost.title, this.newPost.message)
   }
 }

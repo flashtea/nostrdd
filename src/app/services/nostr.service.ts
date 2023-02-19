@@ -79,9 +79,9 @@ export class NostrService {
   }
 
   async listTopics(): Promise<Topic[]> {
-    const filter: Filter = { 
-      kinds: [40], 
-      '#t': [NostrService.NOSTRDD_TAG] 
+    const filter: Filter = {
+      kinds: [40],
+      '#t': [NostrService.NOSTRDD_TAG]
     };
 
     const events: Event[] = await this.relay.list([filter]);
@@ -93,8 +93,8 @@ export class NostrService {
     });
   }
 
-  async createMessage(topicId: string, title: string, message: string, parentId?: string): Promise<void> {
-    
+  async createPost(topicId: string, title: string, message: string): Promise<void> {
+
     const content = {
       title,
       message
@@ -105,14 +105,36 @@ export class NostrService {
       created_at: Math.round(Date.now() / 1000),
       tags: [
         ['t', NostrService.NOSTRDD_TAG],
-        ['e', topicId, this.relay.url, parentId ? 'reply' : 'root']
+        ['e', topicId, this.relay.url, 'root']
       ],
       content: JSON.stringify(content)
     }
 
-    if(parentId) {
-      event.tags.push(['p', parentId, this.relay.url])
+    const signedEvent = finishEvent(event, this.keyManagementService.getPrivKey())
+
+    const pub = this.relay.publish(signedEvent)
+    pub.on('ok', () => {
+      console.log('message event sucessfully submitted')
+    })
+    pub.on('failed', (reason: any) => {
+      console.log('message event failed')
+      console.log(reason)
+    })
+  }
+
+  async createComment(topicId: string, message: string, parentId: string): Promise<void> {
+
+    const event: EventTemplate = {
+      kind: 42,
+      created_at: Math.round(Date.now() / 1000),
+      tags: [
+        ['t', NostrService.NOSTRDD_TAG],
+        ['e', topicId, this.relay.url, 'reply'],
+        ['p', parentId]
+      ],
+      content: message
     }
+    console.log(event)
 
     const signedEvent = finishEvent(event, this.keyManagementService.getPrivKey())
 
@@ -136,12 +158,53 @@ export class NostrService {
     const events: Event[] = await this.relay.list([filter]);
     console.log(events)
 
+    return events.flatMap((event: Event) => {
+      try {
+        const post: Post = JSON.parse(event.content);
+        post.id = event.id;
+        return [post];
+      } catch (e) {
+        return [];
+      }
+    });
+  }
+
+  async listMessages(postId: string): Promise<Post[]> {
+    const filter: Filter = {
+      kinds: [42],
+      '#t': [NostrService.NOSTRDD_TAG],
+      // '#e': [topicId], //TODO filter by 'root' Tag
+      '#p': [postId]
+    };
+
+    const events: Event[] = await this.relay.list([filter]);
+
     return events.map((event: Event) => {
-      const post: Post = JSON.parse(event.content);
-      post.id = event.id;
+      const post: Post = {
+        id: event.id,
+        title: "", //TODO remove
+        message: event.content
+      }
       return post;
     });
   }
 
+  async getPost(postId: string): Promise<Post> {
+    const filter: Filter = {
+      kinds: [42],
+      ids: [postId]
+    };
+
+    const event: Event | null = await this.relay.get(filter)
+
+    if (!event) {
+      throw new Error(`Post with id ${postId} not found`);
+    }
+
+    const post: Post = JSON.parse(event.content);
+    post.id = event.id;
+    post.tags = event.tags;
+    return post;
+  }
 
 }
