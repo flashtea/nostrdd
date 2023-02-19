@@ -1,16 +1,15 @@
 <div class="container mx-auto px-8 pt-4">
   <div class="flex items-center justify-between mb-4">
-    <h1 class="text-2xl font-bold">Recent Posts</h1>
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Recent Posts</h1>
     <a routerLink="./create-post" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-400">Create Post</a>
   </div>
 
   <div class="mb-8" *ngFor="let post of posts">
-    <div class="bg-white p-4 shadow-md rounded-lg">
-      <h2 class="text-lg font-bold mb-2">{{ post.title }}</h2>
-      <p class="text-gray-700 mb-4 break-words overflow-ellipsis" style="max-height: 80px">{{ post.message }}</p>
-      <div class="flex justify-between">
-        <a routerLink="/post/{{ post.id }}" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-400">View</a>
-      </div>
+    <div class="bg-white dark:bg-gray-800/25 p-4 shadow-md rounded-lg">
+      <h2 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
+        <a  routerLink="/post/{{ post.id }}">{{ post.title }}</a>
+      </h2>
+      <p class="text-gray-600 dark:text-gray-300 mb-4 break-words overflow-ellipsis" style="max-height: 80px">{{ post.message }}</p>
     </div>
   </div>
 </div>

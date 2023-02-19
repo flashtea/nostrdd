@@ -1,13 +1,18 @@
-<div class="container mx-auto px-8">
-    <h1 class="text-2xl font-bold mb-4">Create a New Post</h1>
+<div class="container mx-auto px-8 mt-4">
+  <div class="flex items-center mb-4">
+    <a [routerLink]="['/topic', topicId]" class="flex items-center m-l-0 mr-4">
+      <fa-icon [icon]="faChevronLeft" class="m-t-2"></fa-icon>
+    </a>
+    <h1 class="text-2xl font-bold">Create a New Post</h1>
+  </div>
   
     <form (submit)="onSubmit()">
       <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2" for="title">
+        <label class="block font-bold mb-2" for="title">
           Title
         </label>
         <input
-          class="border border-gray-400 p-2 w-full"
+          class="w-full p-2 border-[1px] border-slate-200 dark:border-slate-800 rounded mb-4 bg-white dark:bg-gray-800/25"
           type="text"
           id="title"
           [(ngModel)]="newPost.title"
@@ -17,11 +22,11 @@
       </div>
   
       <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2" for="message">
+        <label class="block font-bold mb-2 " for="message">
           Message
         </label>
         <textarea
-          class="border border-gray-400 p-2 w-full"
+          class="w-full p-2 border-[1px] border-slate-200 dark:border-slate-800 rounded mb-4 bg-white dark:bg-gray-800/25"
           id="message"
           [(ngModel)]="newPost.message"
           name="message"
@@ -33,7 +38,6 @@
         <button class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-400" type="submit">
           Submit
         </button>
-        <a routerLink="/" class="text-blue-500 hover:underline">Cancel</a>
       </div>
     </form>
   </div>

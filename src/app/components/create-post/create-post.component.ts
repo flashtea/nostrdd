@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Post } from '../../models/post';
 import { NostrService } from '../../services/nostr.service';
 
@@ -9,6 +10,7 @@ import { NostrService } from '../../services/nostr.service';
   styleUrls: ['./create-post.component.scss']
 })
 export class CreatePostComponent {
+  faChevronLeft = faChevronLeft;
   newPost: Post = {
     title: '',
     message: ''

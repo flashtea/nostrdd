@@ -1,10 +1,10 @@
 <div class="container mx-auto px-8 pt-4">
-  <h1 class="text-2xl font-bold mb-4">Topics</h1>
+  <h1 class="text-2xl font-bold mb-4 text-slate-900 dark:text-slate-200">Topics</h1>
 
   <div class="mb-8" *ngFor="let topic of topics">
-    <div class="bg-white p-4 shadow-md rounded-lg">
-      <h2 class="text-lg font-bold mb-2"><a [routerLink]="['/topic', topic.id]">{{ topic.name }}</a></h2>
-      <p class="text-gray-700 mb-4 break-words">{{ topic.about }}</p>
+    <div class="bg-white dark:bg-slate-800/25 p-4 shadow-md rounded-lg">
+      <h2 class="text-lg mb-2"><a [routerLink]="['/topic', topic.id]" class="text-gray-800 dark:text-gray-100">{{ topic.name }}</a></h2>
+      <p class="text-gray-600 dark:text-gray-300 mb-4 break-words">{{ topic.about }}</p>
     </div>
   </div>
 </div>

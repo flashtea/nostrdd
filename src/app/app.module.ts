@@ -13,6 +13,7 @@ import { ErrorHandlingComponent } from './error-handling/error-handling.componen
 import { TopicComponent } from './components/topic/topic.component';
 import { FormsModule } from '@angular/forms';
 import { CreateTopicComponent } from './components/create-topic/create-topic.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CreateTopicComponent } from './components/create-topic/create-topic.com
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
